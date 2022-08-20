@@ -3,7 +3,7 @@
 
 ChopcastBot is an admin chat-based website enables chopcast admins to interact and chat with Telegram Users through admin website built with rails and ReactJS.
 
-##Links
+## Links
 
 [Chopcats](https://t.me/chopcastbot)
 
