@@ -5,7 +5,7 @@ ChopcastBot is an admin chat-based website enables chopcast admins to interact a
 
 ##Links
 
-[Chopcats](t.me/chopcastbot) t.me/chopcastbot
+[Chopcats](https://t.me/chopcastbot)
 
 ## Features
 
