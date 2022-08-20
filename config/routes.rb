@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
   namespace :api do
       get '/users', to: 'users#get'
-      get '/messages', to: 'messages#get'
+      get '/messages', to: 'messages#getAllMessages'
+      get '/:chat_id/messages', to: 'messages#getUserMessages'
+      post '/respond', to: 'respond#post'
   end
 
   telegram_webhook TelegramController

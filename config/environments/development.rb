@@ -68,4 +68,12 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
   config.telegram_updates_controller.session_store = :file_store, Rails.root.join('tmp', 'session_store')
+  config.hosts << /.*\.ngrok\.io/
+  Telegram.bots_config = {
+    default: "344550318:AAHXKB9qQw_k383xxZ9vtcJ_Z0vwJPZTlLQ",
+    chat: {
+      token: "344550318:AAHXKB9qQw_k383xxZ9vtcJ_Z0vwJPZTlLQ",
+      username: "alimagedayad"
+    }
+  }
 end

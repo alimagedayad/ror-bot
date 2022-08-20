@@ -57,4 +57,15 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+  Telegram.reset_bots
+  Telegram::Bot::ClientStub.stub_all!
+
+  # rails_helper.rb
+  RSpec.configure do |config|
+    # ...
+    config.after { Telegram.bot.reset }
+    # or for multiple bots:
+    config.after { Telegram.bots.each_value(&:reset) }
+    # ...
+  end
 end
