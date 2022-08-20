@@ -51,6 +51,9 @@ your preferred browser.
 
 These examples were taken from project.
 
+Ue Can find a [Postman](https://www.getpostman.com/collections/d300b931b9c14c6c0c8b)
+
+to use it you should import the collection localy from postman app.
 
 ## Users Endpoint
 
