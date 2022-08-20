@@ -2,6 +2,7 @@ class TelegramController < Telegram::Bot::UpdatesController
     include Telegram::Bot::UpdatesController::MessageContext
     attr_accessor :user
     
+    token = ENV['TOKEN']
     def user()
         @user ||= User.find_by(chat_id: from['id'])
     end
@@ -25,8 +26,8 @@ class TelegramController < Telegram::Bot::UpdatesController
         user = User.create(user_id: from['id'].to_i, username: username, chat_id: chat['id'].to_i)
         respond_with :message, text: "Hi there #{name}! You will be connected to one of our reps soon. Hang tight!"        
       else
-        respond_with :message, text: "#{user().chat_id.to_s}"
-        respond_with :message, text: "Hi # #{user().chat_id.to_s}, #{name()}! You already established a chat with one of our reps wait for their response."
+        puts "#{user().username.to_s}"
+        respond_with :message, text: "Hi # #{user().username.to_s}, #{name()}! You already established a chat with one of our reps wait for their response."
       end
     end
   
@@ -39,12 +40,12 @@ class TelegramController < Telegram::Bot::UpdatesController
       puts "chat: -------- " + message["photo"][0]["file_id"].to_s
       if message['photo'].to_s != nil
         file_id = message["photo"][0]["file_id"].to_s
-        url = "https://api.telegram.org/bot344550318:AAHXKB9qQw_k383xxZ9vtcJ_Z0vwJPZTlLQ/getFile?file_id=#{file_id}"
+        url = "https://api.telegram.org/bot#{token}/getFile?file_id=#{file_id}"
         response = RestClient.get(url)
         response = JSON.parse response.gsub('=>', ":")
 
         file_path = response["result"]["file_path"].to_s
-        url_to_send = "https://api.telegram.org/file/bot344550318:AAHXKB9qQw_k383xxZ9vtcJ_Z0vwJPZTlLQ/photos/#{file_path}"
+        url_to_send = "https://api.telegram.org/file/bot#{token}/photos/#{file_path}"
         
         message = Message.create(
           chat_id: chat['id'],

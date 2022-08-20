@@ -70,10 +70,10 @@ Rails.application.configure do
   config.telegram_updates_controller.session_store = :file_store, Rails.root.join('tmp', 'session_store')
   config.hosts << /.*\.ngrok\.io/
   Telegram.bots_config = {
-    default: "344550318:AAHXKB9qQw_k383xxZ9vtcJ_Z0vwJPZTlLQ",
+    default: ENV['TOKEN'],
     chat: {
-      token: "344550318:AAHXKB9qQw_k383xxZ9vtcJ_Z0vwJPZTlLQ",
-      username: "alimagedayad"
+      token: ENV['TOKEN'],
+      username: ENV['USERNAME']
     }
   }
 end
