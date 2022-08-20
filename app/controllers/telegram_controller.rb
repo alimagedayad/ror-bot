@@ -36,13 +36,30 @@ class TelegramController < Telegram::Bot::UpdatesController
 
     
     def message(message)
-      puts "chat: " + chat.to_s
-      message = Message.create(
-        chat_id: chat['id'],
-        text: message['text'],
-        type: message['type'],
-        users_id: user().id,
-        admin: false)
-      respond_with :message, text: "We have recieved your message"
+      puts "chat: -------- " + message["photo"][0]["file_id"].to_s
+      if message['photo'].to_s != nil
+        file_id = message["photo"][0]["file_id"].to_s
+        url = "https://api.telegram.org/bot344550318:AAHXKB9qQw_k383xxZ9vtcJ_Z0vwJPZTlLQ/getFile?file_id=#{file_id}"
+        response = RestClient.get(url)
+        response = JSON.parse response.gsub('=>', ":")
+
+        file_path = response["result"]["file_path"].to_s
+        url_to_send = "https://api.telegram.org/file/bot344550318:AAHXKB9qQw_k383xxZ9vtcJ_Z0vwJPZTlLQ/photos/#{file_path}"
+        
+        message = Message.create(
+          chat_id: chat['id'],
+          type: message['type'],
+          media_link: url_to_send,
+          users_id: user().id,
+          admin: false)
+
+      else
+        message = Message.create(
+          chat_id: chat['id'],
+          text: message['text'],
+          type: message['type'],
+          users_id: user().id,
+          admin: false)
+      end
     end
   end

@@ -73,3 +73,5 @@ group :test do
 end
 
 gem "telegram-bot", "~> 0.15.6"
+gem "rest-client"
+gem "rack-cors"
